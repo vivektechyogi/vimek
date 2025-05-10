@@ -1,9 +1,18 @@
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CalendarDays } from 'lucide-react';
 
 export function HeroSection() {
+  const handleScrollToRsvp = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetElement = document.getElementById('rsvp');
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="hero" className="relative h-[calc(100vh-4rem)] min-h-[500px] flex items-center justify-center text-center text-white">
       <Image
@@ -27,7 +36,7 @@ export function HeroSection() {
           <span>October 26, 2024</span>
         </div>
         <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-3 text-lg font-playfair-display">
-          <Link href="/rsvp">RSVP Now</Link>
+          <Link href="/#rsvp" onClick={handleScrollToRsvp}>RSVP Now</Link>
         </Button>
       </div>
     </section>

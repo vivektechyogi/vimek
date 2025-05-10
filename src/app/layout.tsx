@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Ever After RSVP',
-  description: 'Join us for our wedding celebration!',
+  title: 'Jane & John - Our Wedding Celebration',
+  description: 'Join us for our wedding celebration! View our story, event details, registry, and RSVP.',
 };
 
 export default function RootLayout({

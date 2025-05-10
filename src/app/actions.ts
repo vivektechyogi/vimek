@@ -48,7 +48,7 @@ export async function submitRsvpAction(
   // For now, we'll just return a success message.
   // The Cloud Function would handle email notifications.
   
-  revalidatePath('/rsvp'); // Optional: revalidate if showing submissions on a page
+  revalidatePath('/'); // Revalidate the homepage
 
   return {
     success: true,
