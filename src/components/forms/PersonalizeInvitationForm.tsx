@@ -8,8 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { personalizeMessageSchema, type PersonalizeMessageData, generatePersonalizedMessageAction } from '@/app/actions';
-import { useEffect, useState }_ from 'react';
+import { generatePersonalizedMessageAction } from '@/app/actions';
+import { type PersonalizeMessageData, personalizeMessageSchema } from '@/lib/schemas';
+import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Sparkles } from 'lucide-react';
 

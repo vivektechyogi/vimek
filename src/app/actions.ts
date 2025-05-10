@@ -3,18 +3,9 @@
 import { z } from 'zod';
 import { personalizeInvitationMessage, type PersonalizeInvitationMessageInput } from '@/ai/flows/personalize-invitation-message';
 import { revalidatePath } from 'next/cache';
+import type { RsvpFormData, PersonalizeMessageData } from '@/lib/schemas';
+import { rsvpFormSchema, personalizeMessageSchema } from '@/lib/schemas';
 
-// Define Zod schema for RSVP form data
-export const rsvpFormSchema = z.object({
-  fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phoneNumber: z.string().optional().or(z.literal("")),
-  guestsCount: z.coerce.number().min(1, { message: "Please specify at least 1 guest." }).max(10, { message: "Maximum 10 guests allowed." }),
-  eventsAttending: z.array(z.string()).min(1, { message: "Please select at least one event you'll be attending." }),
-  notes: z.string().max(500, { message: "Notes must not exceed 500 characters." }).optional(),
-});
-
-export type RsvpFormData = z.infer<typeof rsvpFormSchema>;
 
 interface RsvpFormState {
   success: boolean;
@@ -66,15 +57,6 @@ export async function submitRsvpAction(
   };
 }
 
-
-// Define Zod schema for AI Personalization form data
-export const personalizeMessageSchema = z.object({
-  inviteeName: z.string().min(1, { message: "Invitee name is required." }),
-  eventDetails: z.string().min(10, { message: "Event details must be at least 10 characters." }),
-  additionalInfo: z.string().optional(),
-});
-
-export type PersonalizeMessageData = z.infer<typeof personalizeMessageSchema>;
 
 interface PersonalizeMessageState {
   success: boolean;
