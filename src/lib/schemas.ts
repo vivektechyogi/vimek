@@ -11,12 +11,3 @@ export const rsvpFormSchema = z.object({
 });
 
 export type RsvpFormData = z.infer<typeof rsvpFormSchema>;
-
-// Define Zod schema for AI Personalization form data
-export const personalizeMessageSchema = z.object({
-  inviteeName: z.string().min(1, { message: "Invitee name is required." }),
-  eventDetails: z.string().min(10, { message: "Event details must be at least 10 characters." }),
-  additionalInfo: z.string().optional(),
-});
-
-export type PersonalizeMessageData = z.infer<typeof personalizeMessageSchema>;

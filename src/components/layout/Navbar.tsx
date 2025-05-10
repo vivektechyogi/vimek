@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, BookOpen, CalendarCheck, Send, Edit3, Sparkles } from 'lucide-react';
+import { Menu, Home, BookOpen, CalendarCheck, Send, Edit3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -12,7 +12,6 @@ const navLinks = [
   { href: '/#event-details', label: 'Event Details', icon: CalendarCheck },
   { href: '/#registry', label: 'Registry', icon: Send },
   { href: '/rsvp', label: 'RSVP', icon: Edit3 },
-  { href: '/personalize-invitation', label: 'Personalize', icon: Sparkles },
 ];
 
 export function Navbar() {
