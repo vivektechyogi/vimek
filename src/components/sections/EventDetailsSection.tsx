@@ -1,25 +1,34 @@
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { CalendarDays, Clock, MapPin, Sparkles, MountainSnow } from 'lucide-react';
+import { CalendarDays, Clock, MapPin, Palette, Sun, Heart } from 'lucide-react';
 
 const events = [
   {
-    name: 'Wedding Ceremony',
-    date: 'Saturday, October 26, 2024',
-    time: '11:00 AM onwards',
-    location: 'Triyuginarayan Temple',
+    name: 'Mehendi Ceremony',
+    date: 'Friday, November 21, 2025',
+    time: 'Evening onwards',
+    location: 'Venue at Triyuginarayan',
     address: 'Triyuginarayan Village, Rudraprayag District, Uttarakhand, India',
-    icon: <MountainSnow className="h-10 w-10 text-primary mb-4" />,
-    description: 'Witness our sacred union at the legendary Triyuginarayan Temple, believed to be the venue of Lord Shiva and Goddess Parvati\'s celestial wedding.'
+    icon: <Palette className="h-10 w-10 text-primary mb-4" />,
+    description: 'Join us for the vibrant Mehendi ceremony, a celebration of joy, color, and intricate henna designs as we kick off the wedding festivities.'
   },
   {
-    name: 'Reception & Festivities',
-    date: 'Saturday, October 26, 2024',
-    time: 'Following the Ceremony',
-    location: 'Nearby Venue at Triyuginarayan',
+    name: 'Haldi Ceremony',
+    date: 'Saturday, November 22, 2025',
+    time: 'Morning onwards',
+    location: 'Venue at Triyuginarayan',
     address: 'Triyuginarayan Village, Rudraprayag District, Uttarakhand, India',
-    icon: <Sparkles className="h-10 w-10 text-primary mb-4" />,
-    description: 'Join us for a joyous celebration with traditional Garhwali cuisine, music, and dance amidst the serene Himalayan beauty.'
+    icon: <Sun className="h-10 w-10 text-primary mb-4" />,
+    description: 'Be part of our auspicious Haldi ceremony, a traditional ritual of blessings, purification, and playful moments with friends and family.'
+  },
+  {
+    name: 'Wedding Ceremony & Reception',
+    date: 'Sunday, November 23, 2025',
+    time: 'Wedding: 11:00 AM | Reception: Following Ceremony',
+    location: 'Ceremony: Triyuginarayan Temple | Reception: Nearby Venue',
+    address: 'Triyuginarayan Village, Rudraprayag District, Uttarakhand, India',
+    icon: <Heart className="h-10 w-10 text-primary mb-4" />,
+    description: 'Witness our sacred union at the legendary Triyuginarayan Temple, followed by a joyous reception with dinner, music, and celebrations amidst the serene Himalayas.'
   },
 ];
 
@@ -27,10 +36,10 @@ export function EventDetailsSection() {
   return (
     <PageWrapper id="event-details" className="bg-muted/30">
       <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-playfair-display font-bold mb-4 text-primary">Event Details</h2>
-        <p className="text-lg text-muted-foreground">Join us as we celebrate our special day at the divine Triyuginarayan.</p>
+        <h2 className="text-4xl md:text-5xl font-playfair-display font-bold mb-4 text-primary">Wedding Events</h2>
+        <p className="text-lg text-muted-foreground">Join us as we celebrate our special days at the divine Triyuginarayan.</p>
       </div>
-      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8"> {/* Changed to 1 column for potentially longer descriptions or more events */}
         {events.map((event) => (
           <Card key={event.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden flex flex-col">
             <CardHeader className="bg-card p-6 items-center text-center">

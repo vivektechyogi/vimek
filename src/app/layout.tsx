@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Jane & John - Our Wedding Celebration',
-  description: 'Join us for our wedding celebration! View our story, event details, registry, and RSVP.',
+  title: 'Vivek & Meghna - Our Wedding Celebration #ViMek',
+  description: 'Join Vivek & Meghna for their wedding celebration on November 23, 2025, in Triyuginarayan. #ViMek. Find event details, RSVP, and more.',
 };
 
 export default function RootLayout({

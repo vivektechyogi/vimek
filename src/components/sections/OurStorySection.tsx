@@ -24,9 +24,20 @@ export function OurStorySection() {
           </div>
           <div className="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="font-playfair-display text-3xl text-foreground">From "Hello" to "I Do"</CardTitle>
+              <CardTitle className="font-playfair-display text-3xl text-foreground">Vivek & Meghna: Our Story</CardTitle>
             </CardHeader>
             <CardContent className="p-0 text-muted-foreground space-y-4">
+              <p className="italic text-md mb-6 text-center md:text-left">
+                With the blessings of our families, we, 
+                <br />
+                <span className="font-semibold text-primary">Vivek</span> (son of Smt. Kusum & brother of Sri. Lokesh)
+                <br />
+                and
+                <br />
+                <span className="font-semibold text-primary">Meghna</span> (daughter of Sri. Nitin Puradkar & Smt. Aarti Puradkar),
+                <br />
+                joyfully invite you to share in our happiness as we embark on our forever journey.
+              </p>
               <p>
                 Our journey began on a crisp autumn afternoon, amidst the fallen leaves and the scent of pumpkin spice.
                 What started with a shared laugh over a spilled coffee soon blossomed into a story of love, adventure, and endless support.

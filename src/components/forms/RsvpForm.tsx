@@ -16,9 +16,9 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
 const eventOptions = [
-  { id: 'ceremony', label: 'Ceremony' },
-  { id: 'reception', label: 'Reception' },
-  { id: 'welcome_dinner', label: 'Welcome Dinner (Optional)' },
+  { id: 'mehendi', label: 'Mehendi Ceremony (Nov 21)' },
+  { id: 'haldi', label: 'Haldi Ceremony (Nov 22)' },
+  { id: 'wedding_reception', label: 'Wedding & Reception (Nov 23)' },
 ];
 
 const initialState = {
@@ -78,7 +78,7 @@ export function RsvpForm() {
       <CardHeader className="bg-muted/50 p-6 md:p-8 text-center">
         <CardTitle className="text-3xl md:text-4xl font-playfair-display text-primary">Kindly Respond</CardTitle>
         <CardDescription className="text-md md:text-lg text-muted-foreground mt-2">
-          We are thrilled to invite you! Please let us know if you can make it by [RSVP Date].
+          We are thrilled to invite you! Please let us know if you can make it by November 1st, 2025.
         </CardDescription>
       </CardHeader>
       <CardContent className="p-6 md:p-8">
@@ -114,7 +114,7 @@ export function RsvpForm() {
                 <div key={event.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={event.id}
-                    value={event.label}
+                    value={event.label} // Use label as value, or a more specific value if needed by server
                     {...form.register('eventsAttending')}
                     name="eventsAttending" // ensure name attribute is present for FormData
                   />
