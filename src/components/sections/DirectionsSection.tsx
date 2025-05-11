@@ -1,6 +1,8 @@
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const travelRoutes = [
   {
@@ -104,6 +106,33 @@ export function DirectionsSection() {
                       <li key={index}>{detail}</li>
                     ))}
                   </ul>
+                  {mode.type === 'By Air + Road' && (
+                    <div className="mt-3">
+                      <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                        <Link href="https://www.ixigo.com/flights-to-dehradun-ded" target="_blank" rel="noopener noreferrer">
+                          Book Flights to Dehradun (Ixigo)
+                        </Link>
+                      </Button>
+                    </div>
+                  )}
+                  {mode.type === 'By Train + Road' && (
+                    <div className="mt-3 space-y-2 sm:space-y-0 sm:space-x-2 flex flex-col sm:flex-row items-start">
+                      {mode.details.some(detail => detail.includes('Haridwar (HW)')) && (
+                         <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                           <Link href="https://www.ixigo.com/trains-to-haridwar-hw" target="_blank" rel="noopener noreferrer">
+                             Book Trains to Haridwar (Ixigo)
+                           </Link>
+                         </Button>
+                      )}
+                      {mode.details.some(detail => detail.includes('Rishikesh (RKSH)')) && (
+                         <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                           <Link href="https://www.ixigo.com/trains-to-rishikesh-rksh" target="_blank" rel="noopener noreferrer">
+                             Book Trains to Rishikesh (Ixigo)
+                           </Link>
+                         </Button>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </CardContent>
