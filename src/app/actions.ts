@@ -1,10 +1,12 @@
+
 'use server';
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import type { RsvpFormData } from '@/lib/schemas';
 import { rsvpFormSchema } from '@/lib/schemas';
-
+import { db } from '@/lib/firebase'; // Import Firestore instance
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 interface RsvpFormState {
   success: boolean;
@@ -18,7 +20,6 @@ export async function submitRsvpAction(
 ): Promise<RsvpFormState> {
   const rawFormData = Object.fromEntries(formData.entries());
   
-  // Manually handle eventsAttending as it's an array from checkboxes
   const eventsAttending = formData.getAll('eventsAttending') as string[];
 
   const validatedFields = rsvpFormSchema.safeParse({
@@ -37,21 +38,36 @@ export async function submitRsvpAction(
 
   const data = validatedFields.data;
 
-  // Simulate saving to Firestore and sending notifications
-  console.log('RSVP Submitted:', data);
+  try {
+    // Add data to Firestore
+    await addDoc(collection(db, 'rsvp_submissions'), {
+      ...data,
+      submittedAt: Timestamp.now(), // Add a server timestamp
+    });
 
-  // In a real app, you would:
-  // 1. Add data to Firestore:
-  //    await db.collection('rsvp_submissions').add({ ...data, timestamp: FieldValue.serverTimestamp() });
-  // 2. The Cloud Function `sendRSVPNotification` would trigger.
+    console.log('RSVP Submitted to Firestore:', data);
+    
+    revalidatePath('/'); // Revalidate the homepage
 
-  // For now, we'll just return a success message.
-  // The Cloud Function would handle email notifications.
-  
-  revalidatePath('/'); // Revalidate the homepage
-
-  return {
-    success: true,
-    message: 'Thank you for your RSVP! We look forward to celebrating with you.',
-  };
+    return {
+      success: true,
+      message: 'Thank you for your RSVP! We look forward to celebrating with you.',
+    };
+  } catch (error) {
+    console.error('Error submitting RSVP to Firestore:', error);
+    let errorMessage = 'An unexpected error occurred while submitting your RSVP. Please try again later.';
+    if (error instanceof Error) {
+        // Check for specific Firebase errors if needed, e.g., permission denied
+        if ((error as any).code === 'permission-denied') {
+            errorMessage = "We couldn't save your RSVP due to a permissions issue. Please contact support.";
+        }
+    }
+    return {
+      success: false,
+      message: errorMessage,
+      errors: {
+        _form: [errorMessage],
+      }
+    };
+  }
 }

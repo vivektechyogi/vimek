@@ -1,9 +1,10 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useFormStatus } from 'react-dom';
-import { useActionState, useEffect } from 'react'; // Changed from react-dom and useFormState
+import { useActionState, useEffect } from 'react'; 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -38,7 +39,7 @@ function SubmitButton() {
 }
 
 export function RsvpForm() {
-  const [state, formAction] = useActionState(submitRsvpAction, initialState); // Changed from useFormState
+  const [state, formAction] = useActionState(submitRsvpAction, initialState); 
   const { toast } = useToast();
 
   const form = useForm<RsvpFormData>({
@@ -114,9 +115,9 @@ export function RsvpForm() {
                 <div key={event.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={event.id}
-                    value={event.label} // Use label as value, or a more specific value if needed by server
+                    value={event.label} 
                     {...form.register('eventsAttending')}
-                    name="eventsAttending" // ensure name attribute is present for FormData
+                    name="eventsAttending" 
                   />
                   <Label htmlFor={event.id} className="font-normal text-foreground/90">{event.label}</Label>
                 </div>
