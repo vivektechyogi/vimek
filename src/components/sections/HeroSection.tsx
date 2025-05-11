@@ -1,3 +1,4 @@
+'use client';
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -18,11 +19,12 @@ export function HeroSection() {
       <Image
         src="https://picsum.photos/1600/900"
         alt="Wedding background"
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{objectFit: 'cover'}}
         quality={80}
         className="brightness-50"
         data-ai-hint="romantic wedding landscape"
+        priority // Add priority for LCP image
       />
       <div className="relative z-10 p-4 md:p-8">
         <h1 className="font-playfair-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">

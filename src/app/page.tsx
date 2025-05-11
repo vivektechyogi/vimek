@@ -1,3 +1,4 @@
+'use client';
 
 import { HeroSection } from '@/components/sections/HeroSection';
 import { OurStorySection } from '@/components/sections/OurStorySection';
@@ -29,8 +30,8 @@ export default function HomePage() {
         <Image
           src="https://picsum.photos/1920/1080"
           alt="Elegant background for RSVP"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{objectFit: 'cover'}}
           className="opacity-20 z-0"
           data-ai-hint="soft floral background"
         />
