@@ -2,7 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState, useEffect } from 'react'; // Changed from react-dom and useFormState
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,7 +12,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { submitRsvpAction } from '@/app/actions';
 import { type RsvpFormData, rsvpFormSchema } from '@/lib/schemas';
-import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -38,7 +38,7 @@ function SubmitButton() {
 }
 
 export function RsvpForm() {
-  const [state, formAction] = useFormState(submitRsvpAction, initialState);
+  const [state, formAction] = useActionState(submitRsvpAction, initialState); // Changed from useFormState
   const { toast } = useToast();
 
   const form = useForm<RsvpFormData>({
