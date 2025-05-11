@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { playfairDisplay, lora } from '@/lib/fonts';
 import './globals.css';
@@ -5,6 +6,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { AudioPlayer } from '@/components/layout/AudioPlayer';
 
 export const metadata: Metadata = {
   title: 'Vivek & Meghna - Our Wedding Celebration #ViMek',
@@ -23,6 +25,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
+        <AudioPlayer />
       </body>
     </html>
   );
