@@ -4,35 +4,28 @@
 import { useEffect, useRef } from 'react';
 
 export function AudioPlayer() {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // The YouTube video ID from the provided link: https://www.youtube.com/watch?v=G0HxCWBAdFg
+  const videoId = 'G0HxCWBAdFg';
 
-  // Browsers often block autoplay with sound until user interaction.
-  // This attempts to play, but might be silenced by the browser or require user interaction.
-  useEffect(() => {
-    const playAudio = async () => {
-      if (audioRef.current) {
-        try {
-          // Attempt to play. Some browsers require user interaction for unmuted autoplay.
-          // If it fails, it might be because the browser blocked it.
-          await audioRef.current.play();
-        } catch (error) {
-          console.warn("Audio autoplay was prevented. User interaction might be required to start music.", error);
-          // You could implement a UI element here to allow the user to start the music manually.
-        }
-      }
-    };
-    playAudio();
-  }, []);
+  // Construct the YouTube embed URL with autoplay, loop, and controls hidden.
+  // Mute is often required for autoplay to work in modern browsers.
+  // `playlist` parameter is required for `loop` to work.
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&mute=0&enablejsapi=1`;
+  // Note: mute=0 might be blocked by browser autoplay policies. If audio doesn't play, try mute=1.
 
   return (
-    <audio ref={audioRef} loop autoPlay data-ai-hint="romantic instrumental music">
-      {/*
-        Replace this with an actual URL to your music file.
-        For example: /music/wedding-theme.mp3
-        Using a placeholder URL.
-      */}
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
+    <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+      <iframe
+        width="1" // Minimal size
+        height="1" // Minimal size
+        src={embedUrl}
+        title="YouTube video player for background music"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        data-ai-hint="background music player"
+      ></iframe>
+    </div>
   );
 }
+
