@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, BookOpen, CalendarCheck, Send, Edit3 } from 'lucide-react';
+import { Menu, Home, BookOpen, CalendarCheck, Send, Edit3, Map } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/#hero', label: 'Home', icon: Home },
   { href: '/#our-story', label: 'Our Story', icon: BookOpen },
   { href: '/#event-details', label: 'Event Details', icon: CalendarCheck },
+  { href: '/#directions', label: 'Directions', icon: Map },
   { href: '/#registry', label: 'Registry', icon: Send },
   { href: '/#rsvp', label: 'RSVP', icon: Edit3 },
 ];
@@ -19,17 +20,18 @@ const navLinks = [
 interface NavLinkItemsProps {
   isMobile?: boolean;
   currentActiveHash: string;
-  pathname: string;
   onLinkClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
 }
 
-const NavLinkItems: FC<NavLinkItemsProps> = ({ isMobile = false, currentActiveHash, pathname, onLinkClick }) => {
+const NavLinkItems: FC<NavLinkItemsProps> = ({ isMobile = false, currentActiveHash, onLinkClick }) => {
   return (
     <>
       {navLinks.map((link) => {
-        const isActive =
+        // Check if the current hash exactly matches the link's hash part
+        // or if it's the home page and the link is to #hero (and hash is empty or #hero)
+        const isActive = 
           (link.href.startsWith('/#') && currentActiveHash === link.href.substring(1)) ||
-          (link.href === '/#hero' && pathname === '/' && (currentActiveHash === '' || currentActiveHash === '#hero'));
+          (link.href === '/#hero' && (currentActiveHash === '' || currentActiveHash === 'hero'));
 
         return (
           <Link
@@ -61,38 +63,71 @@ export function Navbar() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      setCurrentHash(window.location.hash);
+      // Remove '#' from hash for consistency
+      setCurrentHash(window.location.hash.substring(1));
     };
 
-    handleHashChange(); // Set initial hash
+    // Set initial hash (without '#')
+    setCurrentHash(window.location.hash.substring(1));
 
-    window.addEventListener('hashchange', handleHashChange);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setCurrentHash(entry.target.id);
+            // Update URL hash without causing a page jump, only if it's different
+            if (window.location.hash !== `#${entry.target.id}`) {
+                 history.pushState(null, '', `#${entry.target.id}`);
+            }
+          }
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px" } // Trigger when element is in the middle of the viewport
+    );
+
+    navLinks.forEach(link => {
+      if (link.href.startsWith("/#")) {
+        const element = document.getElementById(link.href.substring(2));
+        if (element) observer.observe(element);
+      }
+    });
+    
+    // Also observe the hero section if it's not explicitly in navLinks for root path
+    const heroElement = document.getElementById('hero');
+    if (heroElement) observer.observe(heroElement);
+
+
+    window.addEventListener('hashchange', handleHashChange, false);
+    
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('hashchange', handleHashChange, false);
+      navLinks.forEach(link => {
+        if (link.href.startsWith("/#")) {
+          const element = document.getElementById(link.href.substring(2));
+          if (element) observer.unobserve(element);
+        }
+      });
+      if (heroElement) observer.unobserve(heroElement);
     };
-  }, []);
+  }, [pathname]); // Rerun on pathname change if needed for non-SPA parts
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('/#')) {
       e.preventDefault();
-      const targetId = href.substring(2); // Remove '/#'
+      const targetId = href.substring(2); 
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
-        // Update hash manually for immediate state update if needed, though browser does it.
-        // setCurrentHash(`#${targetId}`); 
-        if (isSheetOpen) setIsSheetOpen(false); // Close mobile menu on click
-      }
-    } else if (href === '/' && pathname ==='/') { 
-        e.preventDefault();
-        const targetElement = document.getElementById('hero');
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-          // setCurrentHash('#hero');
-          if (isSheetOpen) setIsSheetOpen(false); // Close mobile menu on click
+        // setCurrentHash(targetId); // Set hash immediately for active state
+        // Manually update hash in URL as scrollIntoView doesn't always do it reliably across browsers
+        if (window.location.hash !== `#${targetId}`) {
+          history.pushState(null, '', `#${targetId}`);
         }
+        if (isSheetOpen) setIsSheetOpen(false); 
+      }
     } else {
-       if (isSheetOpen) setIsSheetOpen(false); // Close mobile menu on click
+       if (isSheetOpen) setIsSheetOpen(false); 
     }
   };
 
@@ -104,7 +139,7 @@ export function Navbar() {
           Ever After
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
-          <NavLinkItems currentActiveHash={currentHash} pathname={pathname} onLinkClick={handleScroll} />
+          <NavLinkItems currentActiveHash={currentHash} onLinkClick={handleScroll} />
         </nav>
         <div className="md:hidden">
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -120,7 +155,7 @@ export function Navbar() {
                   Ever After
                 </Link>
                 <nav className="flex flex-col space-y-4">
-                  <NavLinkItems isMobile currentActiveHash={currentHash} pathname={pathname} onLinkClick={handleScroll} />
+                  <NavLinkItems isMobile currentActiveHash={currentHash} onLinkClick={handleScroll} />
                 </nav>
               </div>
             </SheetContent>
