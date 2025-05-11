@@ -35,7 +35,7 @@ export default function HomePage() {
           fill
           style={{objectFit: 'cover'}}
           className="opacity-20 z-0"
-          data-ai-hint="soft floral background"
+          data-ai-hint="indian floral pattern"
         />
         <div className="relative z-10 flex flex-col items-center justify-center">
           <RsvpForm />

@@ -23,7 +23,7 @@ export function HeroSection() {
         style={{objectFit: 'cover'}}
         quality={80}
         className="brightness-50"
-        data-ai-hint="romantic wedding landscape"
+        data-ai-hint="indian wedding"
         priority // Add priority for LCP image
       />
       <div className="relative z-10 p-4 md:p-8">

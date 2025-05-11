@@ -19,7 +19,7 @@ export function OurStorySection() {
               width={600}
               height={400}
               className="object-cover w-full h-64 md:h-full"
-              data-ai-hint="happy couple black white"
+              data-ai-hint="indian couple"
             />
           </div>
           <div className="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
