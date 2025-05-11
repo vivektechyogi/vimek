@@ -1,11 +1,11 @@
 
 'use server';
 
-import { z } from 'zod';
+import type { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import type { RsvpFormData } from '@/lib/schemas';
 import { rsvpFormSchema } from '@/lib/schemas';
-import { db } from '@/lib/firebase'; // Import Firestore instance
+import { getDbInstance, firebaseInitializationError } from '@/lib/firebase'; 
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 interface RsvpFormState {
@@ -18,6 +18,19 @@ export async function submitRsvpAction(
   prevState: RsvpFormState,
   formData: FormData
 ): Promise<RsvpFormState> {
+
+  if (firebaseInitializationError) {
+    console.error("RSVP submission blocked: Firebase initialization failed.", firebaseInitializationError);
+    const  userFriendlyMessage = "We're experiencing technical difficulties. Please try again later or contact support.";
+    return {
+      success: false,
+      message: userFriendlyMessage,
+      errors: {
+        _form: [userFriendlyMessage],
+      },
+    };
+  }
+
   const rawFormData = Object.fromEntries(formData.entries());
   
   const eventsAttending = formData.getAll('eventsAttending') as string[];
@@ -39,15 +52,15 @@ export async function submitRsvpAction(
   const data = validatedFields.data;
 
   try {
-    // Add data to Firestore
+    const db = getDbInstance(); // Ensures db is available or throws a specific error
     await addDoc(collection(db, 'rsvp_submissions'), {
       ...data,
-      submittedAt: Timestamp.now(), // Add a server timestamp
+      submittedAt: Timestamp.now(), 
     });
 
     console.log('RSVP Submitted to Firestore:', data);
     
-    revalidatePath('/'); // Revalidate the homepage
+    revalidatePath('/'); 
 
     return {
       success: true,
@@ -57,8 +70,11 @@ export async function submitRsvpAction(
     console.error('Error submitting RSVP to Firestore:', error);
     let errorMessage = 'An unexpected error occurred while submitting your RSVP. Please try again later.';
     if (error instanceof Error) {
-        // Check for specific Firebase errors if needed, e.g., permission denied
-        if ((error as any).code === 'permission-denied') {
+        if (error.message.startsWith('Firebase not initialized') || 
+            error.message.startsWith('Firestore database is not available') ||
+            error.message.includes("Failed to get document because the client is offline")) {
+            errorMessage = "We're experiencing technical difficulties connecting to our services. Please try again later or contact support.";
+        } else if ((error as any).code === 'permission-denied') {
             errorMessage = "We couldn't save your RSVP due to a permissions issue. Please contact support.";
         }
     }
