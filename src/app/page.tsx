@@ -1,9 +1,9 @@
+
 'use client';
 
 import { HeroSection } from '@/components/sections/HeroSection';
 import { OurStorySection } from '@/components/sections/OurStorySection';
 import { EventDetailsSection } from '@/components/sections/EventDetailsSection';
-import { RegistrySection } from '@/components/sections/RegistrySection';
 import { DirectionsSection } from '@/components/sections/DirectionsSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -27,7 +27,6 @@ export default function HomePage() {
       <OurStorySection />
       <EventDetailsSection />
       <DirectionsSection />
-      <RegistrySection />
       <PageWrapper id="rsvp" className="relative bg-muted/30">
         <Image
           src="https://picsum.photos/1920/1080"
@@ -64,3 +63,4 @@ export default function HomePage() {
     </>
   );
 }
+

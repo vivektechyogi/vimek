@@ -1,9 +1,10 @@
+
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, BookOpen, CalendarCheck, Send, Edit3, Map } from 'lucide-react';
+import { Menu, Home, BookOpen, CalendarCheck, Edit3, Map } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
@@ -13,7 +14,6 @@ const navLinks = [
   { href: '/#our-story', label: 'Our Story', icon: BookOpen },
   { href: '/#event-details', label: 'Event Details', icon: CalendarCheck },
   { href: '/#directions', label: 'Directions', icon: Map },
-  { href: '/#registry', label: 'Registry', icon: Send },
   { href: '/#rsvp', label: 'RSVP', icon: Edit3 },
 ];
 
@@ -68,7 +68,9 @@ export function Navbar() {
     };
 
     // Set initial hash (without '#')
-    setCurrentHash(window.location.hash.substring(1));
+    if (typeof window !== 'undefined') {
+      setCurrentHash(window.location.hash.substring(1));
+    }
 
 
     const observer = new IntersectionObserver(
@@ -77,7 +79,7 @@ export function Navbar() {
           if (entry.isIntersecting) {
             setCurrentHash(entry.target.id);
             // Update URL hash without causing a page jump, only if it's different
-            if (window.location.hash !== `#${entry.target.id}`) {
+            if (typeof window !== 'undefined' && window.location.hash !== `#${entry.target.id}`) {
                  history.pushState(null, '', `#${entry.target.id}`);
             }
           }
@@ -85,30 +87,39 @@ export function Navbar() {
       },
       { rootMargin: "-50% 0px -50% 0px" } // Trigger when element is in the middle of the viewport
     );
-
-    navLinks.forEach(link => {
-      if (link.href.startsWith("/#")) {
-        const element = document.getElementById(link.href.substring(2));
-        if (element) observer.observe(element);
-      }
-    });
     
-    // Also observe the hero section if it's not explicitly in navLinks for root path
-    const heroElement = document.getElementById('hero');
-    if (heroElement) observer.observe(heroElement);
-
-
-    window.addEventListener('hashchange', handleHashChange, false);
-    
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange, false);
+    let heroElement: HTMLElement | null = null;
+    if (typeof document !== 'undefined') {
       navLinks.forEach(link => {
         if (link.href.startsWith("/#")) {
           const element = document.getElementById(link.href.substring(2));
-          if (element) observer.unobserve(element);
+          if (element) observer.observe(element);
         }
       });
-      if (heroElement) observer.unobserve(heroElement);
+      
+      // Also observe the hero section if it's not explicitly in navLinks for root path
+      heroElement = document.getElementById('hero');
+      if (heroElement) observer.observe(heroElement);
+    }
+
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('hashchange', handleHashChange, false);
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('hashchange', handleHashChange, false);
+      }
+      if (typeof document !== 'undefined') {
+        navLinks.forEach(link => {
+          if (link.href.startsWith("/#")) {
+            const element = document.getElementById(link.href.substring(2));
+            if (element) observer.unobserve(element);
+          }
+        });
+        if (heroElement) observer.unobserve(heroElement);
+      }
     };
   }, [pathname]); // Rerun on pathname change if needed for non-SPA parts
 
@@ -116,15 +127,17 @@ export function Navbar() {
     if (href.startsWith('/#')) {
       e.preventDefault();
       const targetId = href.substring(2); 
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-        // setCurrentHash(targetId); // Set hash immediately for active state
-        // Manually update hash in URL as scrollIntoView doesn't always do it reliably across browsers
-        if (window.location.hash !== `#${targetId}`) {
-          history.pushState(null, '', `#${targetId}`);
+      if (typeof document !== 'undefined') {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+          // setCurrentHash(targetId); // Set hash immediately for active state
+          // Manually update hash in URL as scrollIntoView doesn't always do it reliably across browsers
+          if (typeof window !== 'undefined' && window.location.hash !== `#${targetId}`) {
+            history.pushState(null, '', `#${targetId}`);
+          }
+          if (isSheetOpen) setIsSheetOpen(false); 
         }
-        if (isSheetOpen) setIsSheetOpen(false); 
       }
     } else {
        if (isSheetOpen) setIsSheetOpen(false); 
@@ -165,3 +178,4 @@ export function Navbar() {
     </header>
   );
 }
+
