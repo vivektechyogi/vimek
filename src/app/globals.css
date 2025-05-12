@@ -8,91 +8,91 @@ body {
 
 @layer base {
   :root {
-    --background: 40 50% 95%; /* Warm Off-White / Light Cream */
-    --foreground: 30 40% 25%; /* Dark Earthy Brown */
+    --background: 210 60% 97%; /* Very Light Sky Blue */
+    --foreground: 215 25% 35%; /* Muted Slate Blue */
 
-    --card: 40 40% 97%; /* Slightly lighter cream for cards */
-    --card-foreground: 30 40% 25%; /* Dark Earthy Brown */
+    --card: 210 60% 99%; /* Even Lighter Sky Blue for cards */
+    --card-foreground: 215 25% 35%;
 
-    --popover: 40 40% 97%;
-    --popover-foreground: 30 40% 25%;
+    --popover: 210 60% 99%;
+    --popover-foreground: 215 25% 35%;
 
-    --primary: 35 100% 58%; /* Vibrant Saffron/Orange */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 340 80% 80%; /* Soft Pastel Pink */
+    --primary-foreground: 340 50% 30%; /* Dark Muted Rose for text on primary */
 
-    --secondary: 45 85% 50%; /* Rich Gold */
-    --secondary-foreground: 30 60% 15%; /* Very Dark Brown for text on gold */
+    --secondary: 180 50% 78%; /* Soft Pastel Cyan/Aqua */
+    --secondary-foreground: 180 30% 30%; /* Dark Muted Teal for text on secondary */
 
-    --muted: 30 30% 88%; /* Very light warm grey/beige */
-    --muted-foreground: 30 25% 45%; /* Medium earthy brown for muted text */
+    --muted: 210 40% 94%; /* Light Pastel Gray-Blue */
+    --muted-foreground: 210 20% 55%; /* Medium Muted Gray-Blue */
 
-    --accent: 15 80% 60%; /* Lighter, warm terracotta/reddish-orange */
-    --accent-foreground: 0 0% 100%; /* White for text on accent */
+    --accent: 270 70% 82%; /* Soft Pastel Lavender */
+    --accent-foreground: 270 40% 30%; /* Dark Muted Purple */
 
-    --destructive: 0 84.2% 60.2%; /* Standard Red */
-    --destructive-foreground: 0 0% 98%; /* White */
+    --destructive: 0 70% 85%; /* Soft Pastel Red */
+    --destructive-foreground: 0 50% 35%; /* Dark Muted Red */
 
-    --border: 30 30% 80%; /* Soft, light earthy border */
-    --input: 30 30% 92%; /* Slightly lighter for input background */
-    --ring: 35 90% 65%; /* Lighter Saffron for focus rings */
+    --border: 210 40% 90%; /* Soft Light Gray-Blue border */
+    --input: 210 50% 96%; /* Slightly different for input background */
+    --ring: 340 80% 85%; /* Lighter Pastel Pink for focus rings */
 
     --radius: 0.5rem;
 
-    --chart-1: 35 100% 65%; /* Saffron variant */
-    --chart-2: 45 85% 60%; /* Gold variant */
-    --chart-3: 15 80% 70%; /* Terracotta variant */
-    --chart-4: 25 50% 50%; /* Earthy Brown variant */
-    --chart-5: 120 40% 60%; /* Muted Green (as a potential Vedic/Desi accent) */
+    --chart-1: 340 80% 80%; /* Soft Pastel Pink */
+    --chart-2: 40 90% 80%;  /* Soft Pastel Peach */
+    --chart-3: 180 50% 78%; /* Soft Pastel Cyan/Aqua */
+    --chart-4: 90 60% 80%;  /* Soft Pastel Mint */
+    --chart-5: 270 70% 82%; /* Soft Pastel Lavender */
     
-    /* Sidebar variables adjusted to new theme */
-    --sidebar-background: 40 40% 97%;
-    --sidebar-foreground: 30 40% 25%;
-    --sidebar-primary: 35 100% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 45 85% 80%;
-    --sidebar-accent-foreground: 30 60% 15%;
-    --sidebar-border: 30 30% 85%;
-    --sidebar-ring: 35 90% 65%;
+    /* Sidebar variables adjusted to new pastel theme */
+    --sidebar-background: 210 60% 98%; /* Slightly off-main background */
+    --sidebar-foreground: 215 25% 35%;
+    --sidebar-primary: 340 80% 80%;
+    --sidebar-primary-foreground: 340 50% 30%;
+    --sidebar-accent: 210 60% 92%; /* Background for active/hovered sidebar items - a slightly darker shade of sidebar-bg */
+    --sidebar-accent-foreground: 340 70% 60%; /* Primary color (or a variant) for text on active/hovered items */
+    --sidebar-border: 210 40% 88%;
+    --sidebar-ring: 340 80% 85%;
   }
 
   .dark {
-    --background: 30 20% 10%; /* Very Dark Earthy Brown */
-    --foreground: 40 50% 90%; /* Light Cream/Off-White */
+    --background: 220 20% 12%; /* Very Dark Desaturated Blue */
+    --foreground: 210 30% 88%; /* Light Gray-Blue Pastel */
 
-    --card: 30 20% 15%;
-    --card-foreground: 40 50% 90%;
+    --card: 220 20% 15%;
+    --card-foreground: 210 30% 88%;
 
-    --popover: 30 20% 15%;
-    --popover-foreground: 40 50% 90%;
+    --popover: 220 20% 15%;
+    --popover-foreground: 210 30% 88%;
 
-    --primary: 35 100% 65%; /* Brighter Saffron for dark mode */
-    --primary-foreground: 30 40% 10%; /* Very dark brown/black for text on primary */
+    --primary: 340 70% 75%; /* Brighter Pastel Pink for dark mode */
+    --primary-foreground: 340 30% 15%; /* Very dark rose for text on primary */
 
-    --secondary: 45 85% 60%; /* Brighter Gold for dark mode */
-    --secondary-foreground: 30 60% 10%; /* Very dark brown/black for text on gold */
+    --secondary: 180 50% 70%; /* Brighter Pastel Cyan/Aqua for dark mode */
+    --secondary-foreground: 180 25% 20%; /* Very dark teal for text on secondary */
 
-    --muted: 30 20% 20%;
-    --muted-foreground: 40 40% 70%;
+    --muted: 220 15% 22%;
+    --muted-foreground: 210 20% 65%;
 
-    --accent: 15 80% 65%; /* Brighter terracotta/reddish-orange accent */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 270 60% 78%; /* Brighter Pastel Lavender accent */
+    --accent-foreground: 270 30% 20%; /* Dark Muted Purple */
 
-    --destructive: 0 70% 50%; /* Adjusted Red for dark mode */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 60% 75%; /* Brighter Pastel Red for dark mode */
+    --destructive-foreground: 0 30% 20%; /* Dark Muted Red */
 
-    --border: 30 20% 25%;
-    --input: 30 20% 22%;
-    --ring: 35 90% 70%; /* Brighter Saffron ring */
+    --border: 220 15% 25%;
+    --input: 220 15% 20%;
+    --ring: 340 70% 80%; /* Brighter Pastel Pink ring */
 
-    /* Dark Sidebar variables adjusted to new theme */
-    --sidebar-background: 30 20% 12%;
-    --sidebar-foreground: 40 50% 88%;
-    --sidebar-primary: 35 100% 65%;
-    --sidebar-primary-foreground: 30 40% 10%;
-    --sidebar-accent: 45 85% 70%;
-    --sidebar-accent-foreground: 30 60% 10%;
-    --sidebar-border: 30 20% 30%;
-    --sidebar-ring: 35 90% 70%;
+    /* Dark Sidebar variables adjusted to new pastel theme */
+    --sidebar-background: 220 20% 10%; /* Even darker than main dark bg */
+    --sidebar-foreground: 210 30% 88%;
+    --sidebar-primary: 340 70% 75%;
+    --sidebar-primary-foreground: 340 30% 15%;
+    --sidebar-accent: 220 20% 20%; /* Background for active/hovered sidebar items - slightly lighter than sidebar bg */
+    --sidebar-accent-foreground: 340 70% 70%; /* Primary color (or a variant) for text on active/hovered items */
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 340 70% 80%;
   }
 }
 
