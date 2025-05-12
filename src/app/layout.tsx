@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { playfairDisplay, lora } from '@/lib/fonts';
+import { playfairDisplay, lora, dancingScript } from '@/lib/fonts';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(playfairDisplay.variable, lora.variable)}>
+    <html lang="en" className={cn(playfairDisplay.variable, lora.variable, dancingScript.variable)}>
       <body className="font-lora antialiased flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">{children}</main>

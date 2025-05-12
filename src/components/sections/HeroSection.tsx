@@ -27,21 +27,21 @@ export function HeroSection() {
         priority // Add priority for LCP image
       />
       <div className="relative z-10 p-4 md:p-8">
-        <h1 className="font-playfair-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
+        <h1 className="font-dancing-script text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight">
           Vivek & Meghna
         </h1>
-        <p className="font-lora text-xl md:text-2xl lg:text-3xl mb-2">
+        <p className="font-dancing-script text-3xl md:text-4xl lg:text-5xl mb-4">
           ARE GETTING MARRIED
         </p>
-        <div className="flex items-center justify-center space-x-2 text-lg md:text-xl text-gray-200 mb-2">
-          <CalendarDays className="h-5 w-5 md:h-6 md:w-6" />
+        <div className="font-dancing-script flex items-center justify-center space-x-3 text-xl md:text-2xl text-gray-200 mb-4">
+          <CalendarDays className="h-6 w-6 md:h-7 md:w-7" />
           <span>November 23, 2025</span>
         </div>
-        <div className="flex items-center justify-center space-x-2 text-lg md:text-xl text-gray-200 mb-8">
-          <Hash className="h-5 w-5 md:h-6 md:w-6" />
+        <div className="font-dancing-script flex items-center justify-center space-x-3 text-xl md:text-2xl text-gray-200 mb-10">
+          <Hash className="h-6 w-6 md:h-7 md:w-7" />
           <span>#ViMek</span>
         </div>
-        <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-3 text-lg font-playfair-display">
+        <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-4 text-xl font-playfair-display">
           <Link href="/#rsvp" onClick={handleScrollToRsvp}>RSVP Now</Link>
         </Button>
       </div>

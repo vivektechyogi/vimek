@@ -14,6 +14,7 @@ export default {
         serif: ['var(--font-playfair-display)', 'serif'], // For headings
         lora: ['var(--font-lora)'],
         'playfair-display': ['var(--font-playfair-display)'],
+        'dancing-script': ['var(--font-dancing-script)'],
       },
   		colors: {
   			background: 'hsl(var(--background))',
