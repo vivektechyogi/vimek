@@ -4,12 +4,17 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 const travelRoutes = [
   {
     from: 'Delhi',
     to: 'Triyuginarayan',
     distance: 'Approx. 450-500 km',
+    originReachability: {
+      train: true,
+      flight: true,
+    },
     modes: [
       {
         type: 'By Road',
@@ -44,6 +49,10 @@ const travelRoutes = [
     from: 'Dehradun',
     to: 'Triyuginarayan',
     distance: 'Approx. 250-280 km',
+    originReachability: {
+      train: true,
+      flight: true,
+    },
     modes: [
       {
         type: 'By Road',
@@ -60,6 +69,10 @@ const travelRoutes = [
     from: 'Haridwar/Rishikesh',
     to: 'Triyuginarayan',
     distance: 'Approx. 200-230 km',
+    originReachability: {
+      train: true,
+      flight: false, // Nearest airport is Dehradun for Haridwar/Rishikesh
+    },
     modes: [
       {
         type: 'By Road',
@@ -89,12 +102,30 @@ export function DirectionsSection() {
         {travelRoutes.map((route) => (
           <Card key={route.from} className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
             <CardHeader className="bg-card p-6">
-              <CardTitle className="font-playfair-display text-2xl md:text-3xl text-foreground">
-                From {route.from} to {route.to}
-              </CardTitle>
-              <CardDescription className="text-md text-muted-foreground">
-                {route.distance}
-              </CardDescription>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <div>
+                  <CardTitle className="font-playfair-display text-2xl md:text-3xl text-foreground">
+                    From {route.from} to {route.to}
+                  </CardTitle>
+                  <CardDescription className="text-md text-muted-foreground mt-1">
+                    {route.distance}
+                  </CardDescription>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4">
+                  {route.originReachability?.train && (
+                    <Badge variant="secondary" className="text-xs">
+                      <Train className="h-3 w-3 mr-1.5" />
+                      {route.from} by Train
+                    </Badge>
+                  )}
+                  {route.originReachability?.flight && (
+                    <Badge variant="secondary" className="text-xs">
+                      <Plane className="h-3 w-3 mr-1.5" />
+                      {route.from} by Flight
+                    </Badge>
+                  )}
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
               {route.modes.map((mode) => (
@@ -132,12 +163,12 @@ export function DirectionsSection() {
         ))}
       </div>
 
-      <Card className="mt-12 bg-amber-50 border-amber-300 shadow-lg">
+      <Card className="mt-12 bg-destructive/10 border-destructive/30 shadow-lg">
         <CardHeader className="flex flex-row items-center space-x-3 p-6">
-          <AlertTriangle className="h-8 w-8 text-amber-600" />
-          <CardTitle className="font-playfair-display text-2xl text-amber-700">Travel Advisory</CardTitle>
+          <AlertTriangle className="h-8 w-8 text-destructive" />
+          <CardTitle className="font-playfair-display text-2xl text-destructive-foreground">Travel Advisory</CardTitle>
         </CardHeader>
-        <CardContent className="p-6 pt-0 text-amber-700 space-y-2">
+        <CardContent className="p-6 pt-0 text-destructive-foreground/80 space-y-2">
           <p>Uttarakhand is a hilly region. Roads can be winding and subject to weather conditions, especially during monsoon (July-August) and winter (Dec-Feb).</p>
           <p>It's advisable to start your road journey early in the morning and avoid driving at night in the hills.</p>
           <p>Check current road conditions and weather forecasts before traveling.</p>
