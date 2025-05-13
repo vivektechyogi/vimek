@@ -1,3 +1,4 @@
+
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
@@ -80,7 +81,7 @@ export function DirectionsSection() {
         <h2 className="text-4xl md:text-5xl font-playfair-display font-bold mb-4 text-primary">How to Reach Triyuginarayan</h2>
         <MapPinned className="h-8 w-8 mx-auto text-secondary" />
         <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-          Triyuginarayan is a serene village in the Rudraprayag district of Uttarakhand. Here’s how you can plan your journey:
+          To reach the sacred village of Triyuginarayan in Uttarakhand, most travelers first arrive at major transit hubs like Delhi, Dehradun, or Haridwar. These cities are well-connected by air, rail, and road from across India. From these points, your journey to Triyuginarayan continues as detailed below:
         </p>
       </div>
 
