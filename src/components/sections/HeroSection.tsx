@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -17,13 +18,12 @@ export function HeroSection() {
   return (
     <section id="hero" className="relative h-[calc(100vh-4rem)] min-h-[500px] flex items-center justify-center text-center text-white">
       <Image
-        src="https://picsum.photos/1600/900"
+        src="/images/main.png" // Updated image path
         alt="Wedding background"
         fill
         style={{objectFit: 'cover'}}
         quality={80}
         className="brightness-50"
-        data-ai-hint="indian wedding"
         priority // Add priority for LCP image
       />
       <div className="relative z-10 p-4 md:p-8">
