@@ -30,7 +30,7 @@ export function OurStorySection() {
               <p className="italic text-md mb-6 text-center md:text-left">
                 With the blessings of our families, we,
                 <br />
-                <span className="font-semibold text-primary">Vivek</span> (son of Smt. Kusum & brother of Sri. Lokesh)
+                <span className="font-semibold text-primary">Vivek</span> (son of Smt. Kusum Lalan & brother of Sri. Lokesh Lalan)
                 <br />
                 and
                 <br />
