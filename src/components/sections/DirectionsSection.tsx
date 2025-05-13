@@ -1,4 +1,5 @@
 
+
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
@@ -74,7 +75,7 @@ const travelRoutes = [
     distance: 'Approx. 200-230 km',
     originReachability: {
       train: true, 
-      flight: false, // Updated: Haridwar/Rishikesh primarily reached by train, flight is indirect via Dehradun
+      flight: false, 
       trainCity: 'haridwar', 
       flightCity: 'dehradun', 
     },
@@ -149,24 +150,6 @@ export function DirectionsSection() {
                       <li key={index}>{detail}</li>
                     ))}
                   </ul>
-                  {mode.type === 'By Air + Road' && (
-                    <div className="mt-3">
-                      <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
-                        <Link href="https://www.ixigo.com/flights" target="_blank" rel="noopener noreferrer">
-                          Book Connecting Flights (Ixigo)
-                        </Link>
-                      </Button>
-                    </div>
-                  )}
-                  {mode.type === 'By Train + Road' && (
-                    <div className="mt-3">
-                       <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
-                         <Link href="https://www.ixigo.com/trains" target="_blank" rel="noopener noreferrer">
-                           Book Connecting Trains (Ixigo)
-                         </Link>
-                       </Button>
-                    </div>
-                  )}
                 </div>
               ))}
             </CardContent>
@@ -190,4 +173,3 @@ export function DirectionsSection() {
     </PageWrapper>
   );
 }
-
