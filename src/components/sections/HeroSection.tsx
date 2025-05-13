@@ -25,6 +25,7 @@ export function HeroSection() {
         quality={80}
         className="brightness-50"
         priority // Add priority for LCP image
+        data-ai-hint="wedding couple"
       />
       <div className="relative z-10 p-4 md:p-8">
         <h1 className="font-dancing-script text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight">
@@ -48,3 +49,4 @@ export function HeroSection() {
     </section>
   );
 }
+
