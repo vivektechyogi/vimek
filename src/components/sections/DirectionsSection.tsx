@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-// Removed Badge import as it's no longer directly used for origin reachability
 
 const travelRoutes = [
   {
@@ -121,7 +120,7 @@ export function DirectionsSection() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4">
                   {route.originReachability?.train && route.originReachability.trainCity && (
-                    <Button asChild size="sm" variant="outline" className="text-xs border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                    <Button asChild size="sm" variant="outline" className="text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=trains+to+${encodeURIComponent(route.originReachability.trainCity)}`} target="_blank" rel="noopener noreferrer">
                         <Train className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.trainCity)} by Train
@@ -129,7 +128,7 @@ export function DirectionsSection() {
                     </Button>
                   )}
                   {route.originReachability?.flight && route.originReachability.flightCity && (
-                     <Button asChild size="sm" variant="outline" className="text-xs border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                     <Button asChild size="sm" variant="outline" className="text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=flights+to+${encodeURIComponent(route.originReachability.flightCity)}`} target="_blank" rel="noopener noreferrer">
                         <Plane className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.flightCity)} by Flight
