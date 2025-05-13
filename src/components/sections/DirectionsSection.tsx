@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { MapPinned, Car, Train, Plane, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+// Removed Badge import as it's no longer directly used for origin reachability
 
 const travelRoutes = [
   {
@@ -14,6 +14,8 @@ const travelRoutes = [
     originReachability: {
       train: true,
       flight: true,
+      trainCity: 'delhi',
+      flightCity: 'delhi',
     },
     modes: [
       {
@@ -52,6 +54,8 @@ const travelRoutes = [
     originReachability: {
       train: true,
       flight: true,
+      trainCity: 'dehradun',
+      flightCity: 'dehradun', // Jolly Grant Airport is in Dehradun
     },
     modes: [
       {
@@ -70,8 +74,10 @@ const travelRoutes = [
     to: 'Triyuginarayan',
     distance: 'Approx. 200-230 km',
     originReachability: {
-      train: true,
-      flight: false, // Nearest airport is Dehradun for Haridwar/Rishikesh
+      train: true, // Haridwar or Rishikesh stations
+      flight: true, // Via Dehradun's Jolly Grant Airport
+      trainCity: 'haridwar', // Default to Haridwar for trains
+      flightCity: 'dehradun', // Flight is to Dehradun for Haridwar/Rishikesh
     },
     modes: [
       {
@@ -88,6 +94,8 @@ const travelRoutes = [
 ];
 
 export function DirectionsSection() {
+  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
   return (
     <PageWrapper id="directions" className="bg-background">
       <div className="text-center mb-12">
@@ -112,17 +120,21 @@ export function DirectionsSection() {
                   </CardDescription>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4">
-                  {route.originReachability?.train && (
-                    <Badge variant="secondary" className="text-xs">
-                      <Train className="h-3 w-3 mr-1.5" />
-                      {route.from} by Train
-                    </Badge>
+                  {route.originReachability?.train && route.originReachability.trainCity && (
+                    <Button asChild size="sm" variant="outline" className="text-xs border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                      <Link href={`https://www.google.com/search?q=trains+to+${encodeURIComponent(route.originReachability.trainCity)}`} target="_blank" rel="noopener noreferrer">
+                        <Train className="h-3 w-3 mr-1.5" />
+                        Reach {capitalize(route.originReachability.trainCity)} by Train
+                      </Link>
+                    </Button>
                   )}
-                  {route.originReachability?.flight && (
-                    <Badge variant="secondary" className="text-xs">
-                      <Plane className="h-3 w-3 mr-1.5" />
-                      {route.from} by Flight
-                    </Badge>
+                  {route.originReachability?.flight && route.originReachability.flightCity && (
+                     <Button asChild size="sm" variant="outline" className="text-xs border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
+                      <Link href={`https://www.google.com/search?q=flights+to+${encodeURIComponent(route.originReachability.flightCity)}`} target="_blank" rel="noopener noreferrer">
+                        <Plane className="h-3 w-3 mr-1.5" />
+                        Reach {capitalize(route.originReachability.flightCity)} by Flight
+                      </Link>
+                    </Button>
                   )}
                 </div>
               </div>
@@ -142,7 +154,7 @@ export function DirectionsSection() {
                     <div className="mt-3">
                       <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
                         <Link href="https://www.ixigo.com/flights" target="_blank" rel="noopener noreferrer">
-                          Book Flights (Ixigo)
+                          Book Connecting Flights (Ixigo)
                         </Link>
                       </Button>
                     </div>
@@ -151,7 +163,7 @@ export function DirectionsSection() {
                     <div className="mt-3">
                        <Button asChild size="sm" variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary">
                          <Link href="https://www.ixigo.com/trains" target="_blank" rel="noopener noreferrer">
-                           Book Trains (Ixigo)
+                           Book Connecting Trains (Ixigo)
                          </Link>
                        </Button>
                     </div>
