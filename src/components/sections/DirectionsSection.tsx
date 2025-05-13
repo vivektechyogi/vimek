@@ -120,7 +120,7 @@ export function DirectionsSection() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4">
                   {route.originReachability?.train && route.originReachability.trainCity && (
-                    <Button asChild size="sm" variant="outline" className="text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
+                    <Button asChild variant="outline" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=trains+to+${encodeURIComponent(route.originReachability.trainCity)}`} target="_blank" rel="noopener noreferrer">
                         <Train className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.trainCity)} by Train
@@ -128,7 +128,7 @@ export function DirectionsSection() {
                     </Button>
                   )}
                   {route.originReachability?.flight && route.originReachability.flightCity && (
-                     <Button asChild size="sm" variant="outline" className="text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
+                     <Button asChild variant="outline" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=flights+to+${encodeURIComponent(route.originReachability.flightCity)}`} target="_blank" rel="noopener noreferrer">
                         <Plane className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.flightCity)} by Flight
@@ -190,3 +190,4 @@ export function DirectionsSection() {
     </PageWrapper>
   );
 }
+
