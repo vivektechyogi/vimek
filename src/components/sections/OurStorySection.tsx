@@ -14,7 +14,7 @@ export function OurStorySection() {
         <div className="md:flex">
           <div className="md:w-1/2">
             <Image
-              src="https://imagekit.io/tools/asset-public-link?detail=%7B%22name%22%3A%22main.png%22%2C%22type%22%3A%22image%2Fpng%22%2C%22signedurl_expire%22%3A%222028-05-12T16%3A53%3A13.568Z%22%2C%22signedUrl%22%3A%22https%3A%2F%2Fmedia-hosting.imagekit.io%2Fc43d80a3272a46c6%2Fmain.png%3FExpires%3D1841763194%26Key-Pair-Id%3DK2ZIVPTIP2VGHC%26Signature%3Dbx8AvDnQpRe2jeqHCdQ7RHvhLHmWKeGDvXL8~ef-8YhASOPfrWsv3y7bFUW6EMRJhDSunHmxWHgKh3RAoDxww2rdjmIGDF~PM59f4pKH1w0LkT28RKr6trUaMX0dbxxokt62SFuM~JSZzR8m69ZwEMtIY8QNpmqZ9YcKGGIzsyh4z2hczkQ3YzZK9JtC4~sy2hlc7saYVa8-7sz9RktfLtPeHB9Itn1q8cwFDkfQuvOQ5HAwJ~1E8H4vDPlfjofeaW7mFke7hf5QUKhJvki49QDMlTjercBeVq-~5qe8yxZ9wsrlSxglj15tAJWGcpAXk4xiQGXKFDB0wHIC0nC-DQ__%22%7D"
+              src="https://media-hosting.imagekit.io/e8f333912358467a/submain.png?Expires=1841763727&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=xWRrix74wIgIaXSEBhV9~avKX77lPETnX1IKUDJwOSzXJiCwCSTMB3WBOhEBgWSZu8iMCEhMVpGbMs3RgTd7fy5V81s5GaF9LGmGted2iY5UZZQoKvqx7d598PC~BXk1QnTDcosbBN2anNzN1DSKg8CoHL5lde6IhvUa5tVAvVFs5rwpQIVMnEGxYWsMKh8M~bEyX0JBOBpeoeqSGil~pdzHW-xfRybykmXJtRC~ynCD~U~uh6iNSmugi6beQMWwqIKNooDu7c9-MvDQ6UygIvZqV64O-DtRMfCRCdVVO5rqHR39N0YUtqXbTLzt5Hqskt2mLPbSz~HNf6o4CRnY6w__"
               alt="Couple photo"
               width={600}
               height={400}
