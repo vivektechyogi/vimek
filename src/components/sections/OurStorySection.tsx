@@ -39,19 +39,22 @@ export function OurStorySection() {
                 joyfully invite you to share in our happiness as we embark on our forever journey.
               </p>
               <p>
-                Our story began in the digital realm, connecting through social media and soon finding ourselves working side-by-side. 
-                It was a tale of a tech guy making his way to a management girl, a partnership that blossomed beyond professional collaboration. 
-                Our first real-world meeting at the serene ISKCON temple in Mumbai marked the true beginning of our beautiful relationship, blessed by the grace of Radhe-Krishna.
+                Some stories are written in the stars — ours began with a simple message on a social media platform. A tech guy met a management girl, two souls with different worlds but the same heartbeat. From working together to understanding each other’s dreams, we didn’t even realize when friendship quietly blossomed into love.
               </p>
               <p>
-                Our shared love for Lord Shiva drew us to the sacred Triyuginarayan temple for our wedding, the very place where Shiva and Parvati were united. This choice reflects our deep spiritual connection and reverence for divine unions.
+                Our first meeting was at the ISKCON Temple in Mumbai — a moment that felt like destiny. Under the gentle gaze of Radha-Krishna, something divine began between us. From that day forward, our bond only grew stronger, wrapped in grace, trust, and a shared spiritual connection.
               </p>
               <p>
-                Loving each other is common, but true perfection is a myth. We believe our bond isn't just about celebrating happy moments; it's about embracing each other's flaws, sharing difficult times, and holding hands firmly through every high and low. 
-                Our journey, which started with the blessings of Radhe-Krishna, now leads us to the hallowed grounds where Shiv and Parvati began their marital life. 
+                Our hearts have always been drawn to the stories of Lord Shiva and Parvati — of eternal love, balance, and unbreakable union. That’s why we chose Triyuginarayan Temple, the sacred ground where Shiva and Parvati were married, as the place to begin our forever. For us, it’s more than a wedding venue — it’s a symbol of divine love, the kind we hope to carry in our own journey.
               </p>
               <p>
-                We would be overjoyed to have you witness this beautiful and significant step in our shared journey.
+                In a world where love often comes with conditions, we chose something deeper. We don’t just love each other for the good days, the laughter, and the easy moments — we’ve embraced each other through flaws, fears, and storms. We’ve held hands through the chaos, and found peace in each other’s presence.
+              </p>
+              <p>
+                With Radha-Krishna’s blessings at our beginning, and Lord Shiva and Parvati’s love guiding our next chapter, we are stepping into marriage with hearts full of gratitude and souls deeply in love.
+              </p>
+              <p>
+                We would be truly honoured to have you with us as we take this beautiful step in our journey — a celebration not just of love, but of faith, friendship, and forever.
               </p>
             </CardContent>
           </div>
