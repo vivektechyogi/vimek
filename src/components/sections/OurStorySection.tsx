@@ -28,7 +28,7 @@ export function OurStorySection() {
             </CardHeader>
             <CardContent className="p-0 text-muted-foreground space-y-4">
               <p className="italic text-md mb-6 text-center md:text-left">
-                With the blessings of our families, we, 
+                With the blessings of our families, we,
                 <br />
                 <span className="font-semibold text-primary">Vivek</span> (son of Smt. Kusum & brother of Sri. Lokesh)
                 <br />
@@ -39,15 +39,19 @@ export function OurStorySection() {
                 joyfully invite you to share in our happiness as we embark on our forever journey.
               </p>
               <p>
-                Our journey began on a crisp autumn afternoon, amidst the fallen leaves and the scent of pumpkin spice.
-                What started with a shared laugh over a spilled coffee soon blossomed into a story of love, adventure, and endless support.
+                Our story began in the digital realm, connecting through social media and soon finding ourselves working side-by-side. 
+                It was a tale of a tech guy making his way to a management girl, a partnership that blossomed beyond professional collaboration. 
+                Our first real-world meeting at the serene ISKCON temple in Mumbai marked the true beginning of our beautiful relationship, blessed by the grace of Radhe-Krishna.
               </p>
               <p>
-                Through sunny days and stormy nights, our bond has only grown stronger. We've built a life filled with joy,
-                cherished memories, and a deep understanding of one another. Now, we're thrilled to embark on our greatest adventure yet – marriage.
+                Our shared love for Lord Shiva drew us to the sacred Triyuginarayan temple for our wedding, the very place where Shiva and Parvati were united. This choice reflects our deep spiritual connection and reverence for divine unions.
               </p>
               <p>
-                We can't wait to celebrate this special milestone with you, our dearest friends and family, as we say "I do" and start our forever.
+                Loving each other is common, but true perfection is a myth. We believe our bond isn't just about celebrating happy moments; it's about embracing each other's flaws, sharing difficult times, and holding hands firmly through every high and low. 
+                Our journey, which started with the blessings of Radhe-Krishna, now leads us to the hallowed grounds where Shiv and Parvati began their marital life. 
+              </p>
+              <p>
+                We would be overjoyed to have you witness this beautiful and significant step in our shared journey.
               </p>
             </CardContent>
           </div>
