@@ -1,3 +1,4 @@
+
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { CalendarDays, Clock, MapPin, Palette, Sun, Heart } from 'lucide-react';
@@ -6,7 +7,7 @@ const events = [
   {
     name: 'Mehendi Ceremony',
     date: 'Friday, November 21, 2025',
-    time: 'Evening onwards',
+    time: '10:00 AM onwards',
     location: 'Venue at Triyuginarayan',
     address: 'Triyuginarayan Village, Rudraprayag District, Uttarakhand, India',
     icon: <Palette className="h-10 w-10 text-primary mb-4" />,
