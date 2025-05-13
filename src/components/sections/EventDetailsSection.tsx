@@ -16,7 +16,7 @@ const events = [
   {
     name: 'Haldi Ceremony',
     date: 'Saturday, November 22, 2025',
-    time: 'Morning onwards',
+    time: '3:00 PM onwards',
     location: 'Venue at Triyuginarayan',
     address: 'Triyuginarayan Village, Rudraprayag District, Uttarakhand, India',
     icon: <Sun className="h-10 w-10 text-primary mb-4" />,
