@@ -73,10 +73,10 @@ const travelRoutes = [
     to: 'Triyuginarayan',
     distance: 'Approx. 200-230 km',
     originReachability: {
-      train: true, // Haridwar or Rishikesh stations
-      flight: true, // Via Dehradun's Jolly Grant Airport
-      trainCity: 'haridwar', // Default to Haridwar for trains
-      flightCity: 'dehradun', // Flight is to Dehradun for Haridwar/Rishikesh
+      train: true, 
+      flight: false, // Updated: Haridwar/Rishikesh primarily reached by train, flight is indirect via Dehradun
+      trainCity: 'haridwar', 
+      flightCity: 'dehradun', 
     },
     modes: [
       {
