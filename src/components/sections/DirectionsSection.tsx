@@ -121,7 +121,7 @@ export function DirectionsSection() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4">
                   {route.originReachability?.train && route.originReachability.trainCity && (
-                    <Button asChild variant="outline" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
+                    <Button asChild variant="outline" size="sm" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=trains+to+${encodeURIComponent(route.originReachability.trainCity)}`} target="_blank" rel="noopener noreferrer">
                         <Train className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.trainCity)} by Train
@@ -129,7 +129,7 @@ export function DirectionsSection() {
                     </Button>
                   )}
                   {route.originReachability?.flight && route.originReachability.flightCity && (
-                     <Button asChild variant="outline" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
+                     <Button asChild variant="outline" size="sm" className="px-2 py-1 h-auto text-xs border-accent text-accent hover:bg-accent/10 hover:text-accent">
                       <Link href={`https://www.google.com/search?q=flights+to+${encodeURIComponent(route.originReachability.flightCity)}`} target="_blank" rel="noopener noreferrer">
                         <Plane className="h-3 w-3 mr-1.5" />
                         Reach {capitalize(route.originReachability.flightCity)} by Flight
@@ -163,13 +163,14 @@ export function DirectionsSection() {
           <CardTitle className="font-playfair-display text-2xl text-destructive-foreground">Travel Advisory</CardTitle>
         </CardHeader>
         <CardContent className="p-6 pt-0 text-destructive-foreground/80 space-y-2">
-          <p>Uttarakhand is a hilly region. Roads can be winding and subject to weather conditions, especially during monsoon (July-August) and winter (Dec-Feb).</p>
+          <p>Uttarakhand is a hilly region. Roads can be winding and subject to weather conditions. November marks the transition towards winter; expect cool to cold temperatures, especially in the evenings and at higher altitudes. Snowfall is possible in higher reaches later in the month.</p>
           <p>It's advisable to start your road journey early in the morning and avoid driving at night in the hills.</p>
           <p>Check current road conditions and weather forecasts before traveling.</p>
-          <p>Ensure your vehicle is in good condition if self-driving. Carry basic medical supplies.</p>
+          <p>Ensure your vehicle is in good condition if self-driving. Carry basic medical supplies and warm clothing.</p>
           <p>Network connectivity can be poor in remote areas. Download offline maps.</p>
         </CardContent>
       </Card>
     </PageWrapper>
   );
 }
+
