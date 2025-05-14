@@ -24,7 +24,7 @@ export function OurStorySection() {
           </div>
           <div className="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="font-playfair-display text-3xl text-foreground">Vivek & Meghna: Our Story</CardTitle>
+              <CardTitle className="font-playfair-display text-3xl text-foreground">Our Story</CardTitle>
             </CardHeader>
             <CardContent className="p-0 text-muted-foreground space-y-4">
               <p className="italic text-md mb-6 text-center md:text-left">
