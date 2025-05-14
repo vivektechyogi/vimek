@@ -39,8 +39,7 @@ export function HeroSection() {
           <span>November 23, 2025</span>
         </div>
         <div className="font-dancing-script flex items-center justify-center space-x-3 text-xl md:text-2xl text-gray-200 mb-10">
-          <Hash className="h-6 w-6 md:h-7 md:w-7" />
-          <span>#ViMek</span>
+          <span>#MeVek</span>
         </div>
         <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-4 text-xl font-playfair-display">
           <Link href="/#rsvp" onClick={handleScrollToRsvp}>RSVP Now</Link>

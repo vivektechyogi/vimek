@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 import { AudioPlayer } from '@/components/layout/AudioPlayer';
 
 export const metadata: Metadata = {
-  title: 'Vivek & Meghna - Our Wedding Celebration #ViMek',
-  description: 'Join Vivek & Meghna for their wedding celebration on November 23, 2025, in Triyuginarayan. #ViMek. Find event details, RSVP, and more.',
+  title: 'Vivek & Meghna - Our Wedding Celebration #MeVek',
+  description: 'Join Vivek & Meghna for their wedding celebration on November 23, 2025, in Triyuginarayan. #MeVek. Find event details, RSVP, and more.',
 };
 
 export default function RootLayout({
