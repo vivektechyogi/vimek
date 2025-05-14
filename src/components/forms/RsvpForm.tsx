@@ -2,7 +2,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm, type SubmitHandler, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -44,7 +44,7 @@ export function RsvpForm() {
     },
   });
 
-  const { register, handleSubmit, formState: { errors: clientErrors }, reset, setError } = form;
+  const { register, handleSubmit, formState: { errors: clientErrors }, reset, setError, control } = form;
 
   const onSubmitRsvp: SubmitHandler<RsvpFormData> = async (data) => {
     setIsLoading(true);
@@ -133,19 +133,33 @@ export function RsvpForm() {
 
           <div>
             <Label className="font-semibold text-foreground/80 block mb-2">Events Attending</Label>
-            <div className="space-y-2">
-              {eventOptions.map((event) => (
-                <div key={event.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={event.id}
-                    value={event.label}
-                    {...register('eventsAttending')}
-                    name="eventsAttending"
-                  />
-                  <Label htmlFor={event.id} className="font-normal text-foreground/90">{event.label}</Label>
+            <Controller
+              name="eventsAttending"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2">
+                  {eventOptions.map((event) => (
+                    <div key={event.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={event.id}
+                        checked={field.value?.includes(event.label)}
+                        onCheckedChange={(checked) => {
+                          const currentValues = field.value || [];
+                          if (checked) {
+                            field.onChange([...currentValues, event.label]);
+                          } else {
+                            field.onChange(currentValues.filter((value) => value !== event.label));
+                          }
+                        }}
+                      />
+                      <Label htmlFor={event.id} className="font-normal text-foreground/90">
+                        {event.label}
+                      </Label>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            />
             {getCombinedError('eventsAttending') && <p className="text-sm text-destructive mt-1">{getCombinedError('eventsAttending')}</p>}
           </div>
 
