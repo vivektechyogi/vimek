@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "vimek-8728d"
-  }
+    "default": "vivek-and-meghna-ki-shaadi",
+    "mevek": "vivek-and-meghna-ki-shaadi"
+  },
+  "targets": {},
+  "etags": {}
 }

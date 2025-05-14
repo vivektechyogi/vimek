@@ -6,13 +6,13 @@ import { getFirestore, type Firestore } from 'firebase/firestore';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // IMPORTANT: Replace these placeholder values with your actual Firebase project credentials.
 const firebaseConfig = {
-  apiKey: "AIzaSyD6KK7FCrwqUcPphEjsgRWQCZr5qOc2pmc",
-  authDomain: "vimek-8728d.firebaseapp.com",
-  projectId: "vimek-8728d",
-  storageBucket: "vimek-8728d.firebasestorage.app",
-  messagingSenderId: "264585120007",
-  appId: "1:264585120007:web:68f78cf3e4767e27995da2",
-  measurementId: "G-RD772R7S40"
+  apiKey: "AIzaSyC7Nfbq_1G0dMUGpPjyJRIvRUk9H90JpNU",
+  authDomain: "vivek-and-meghna-ki-shaadi.firebaseapp.com",
+  projectId: "vivek-and-meghna-ki-shaadi",
+  storageBucket: "vivek-and-meghna-ki-shaadi.firebasestorage.app",
+  messagingSenderId: "1081411719264",
+  appId: "1:1081411719264:web:e814fbd70c8f740ded7305",
+  measurementId: "G-L90V6J6HRD"
 };
 
 let app: FirebaseApp | undefined;
