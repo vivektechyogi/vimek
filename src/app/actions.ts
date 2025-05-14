@@ -1,5 +1,9 @@
 
-'use server';
+
+// This file is no longer using 'use server' as the RSVP form has been refactored
+// to use a traditional API route (/api/rsvp).
+// The submitRsvpAction function remains here but is not directly invoked by the form.
+// It could be repurposed or removed if not needed for other server-side logic.
 
 import type { z } from 'zod';
 import { revalidatePath } from 'next/cache';
@@ -15,8 +19,8 @@ interface RsvpFormState {
 }
 
 export async function submitRsvpAction(
-  prevState: RsvpFormState,
-  formData: FormData
+  // prevState: RsvpFormState, // prevState is typically used with useActionState
+  rawFormData: RsvpFormData // Direct data for non-action usage
 ): Promise<RsvpFormState> {
 
   if (firebaseInitializationError) {
@@ -30,16 +34,9 @@ export async function submitRsvpAction(
       },
     };
   }
-
-  const rawFormData = Object.fromEntries(formData.entries());
   
-  const eventsAttending = formData.getAll('eventsAttending') as string[];
-
-  const validatedFields = rsvpFormSchema.safeParse({
-    ...rawFormData,
-    guestsCount: rawFormData.guestsCount ? parseInt(rawFormData.guestsCount as string, 10) : undefined,
-    eventsAttending: eventsAttending,
-  });
+  // If rawFormData is already RsvpFormData, direct validation can occur
+  const validatedFields = rsvpFormSchema.safeParse(rawFormData);
 
   if (!validatedFields.success) {
     return {
@@ -52,22 +49,26 @@ export async function submitRsvpAction(
   const data = validatedFields.data;
 
   try {
-    const db = getDbInstance(); // Ensures db is available or throws a specific error
+    const db = getDbInstance(); 
     await addDoc(collection(db, 'rsvp_submissions'), {
       ...data,
       submittedAt: Timestamp.now(), 
     });
 
-    console.log('RSVP Submitted to Firestore:', data);
+    console.log('RSVP Submitted to Firestore (from actions.ts - potentially unused):', data);
     
-    revalidatePath('/'); 
+    // revalidatePath might not be needed if the form is fully client-side now
+    // and doesn't display data that needs immediate revalidation.
+    // If there's a page displaying RSVP counts, this might still be useful
+    // if this function is called elsewhere.
+    // revalidatePath('/'); 
 
     return {
       success: true,
       message: 'Thank you for your RSVP! We look forward to celebrating with you.',
     };
   } catch (error) {
-    console.error('Error submitting RSVP to Firestore:', error);
+    console.error('Error submitting RSVP to Firestore (from actions.ts):', error);
     let errorMessage = 'An unexpected error occurred while submitting your RSVP. Please try again later.';
     if (error instanceof Error) {
         if (error.message.startsWith('Firebase not initialized') || 
