@@ -18,7 +18,7 @@ export function HeroSection() {
   return (
     <section id="hero" className="relative h-[calc(100vh-4rem)] min-h-[500px] flex items-center justify-center text-center text-white">
       <Image
-        src="https://media-hosting.imagekit.io/c43d80a3272a46c6/main.png?Expires=1841763194&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=bx8AvDnQpRe2jeqHCdQ7RHvhLHmWKeGDvXL8~ef-8YhASOPfrWsv3y7bFUW6EMRJhDSunHmxWHgKh3RAoDxww2rdjmIGDF~PM59f4pKH1w0LkT28RKr6trUaMX0dbxxokt62SFuM~JSZzR8m69ZwEMtIY8QNpmqZ9YcKGGIzsyh4z2hczkQ3YzZK9JtC4~sy2hlc7saYVa8-7sz9RktfLtPeHB9Itn1q8cwFDkfQuvOQ5HAwJ~1E8H4vDPlfjofeaW7mFke7hf5QUKhJvki49QDMlTjercBeVq-~5qe8yxZ9wsrlSxglj15tAJWGcpAXk4xiQGXKFDB0wHIC0nC-DQ__"
+        src="https://media-hosting.imagekit.io/0d5f6d085ec34beb/Black and Red Scrapbook Wedding Anniversary Vlog YouTube Thumbnail (1).png?Expires=1841817663&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=FryU9AUW8UWIZC0mCJsNZEDusNgl3QxFgKd15EhjzbVhrCdbQKm02ytF3R9-GI13HtJo9TmuxrbrsDr9bWrLbwU2a25d1xaTUfBL2Ws2qfCArRyUmRx4PrC~bNM2gx76r1X06PofTFE8ITzYjhVXcgWYVMdYfjpYpMGsxKnPWd9CBv6FBlCsWmKqOAtlK53W0a~e4ip7ylGHiRlp8S6J4QQq1GlQo0jhVgVBS5x53qMe2Jvzlw5rjwRUoIXHnR0ZOc8OrJ-axkUCPGqD5jAVj5v-7ZwLGCWUuQxEXJmoP5F6-jWzhEOcdLUxkNs~0gci0U1jVVgbOw2b4fCT0iwAXA__"
         alt="Wedding background"
         fill
         style={{objectFit: 'cover'}}

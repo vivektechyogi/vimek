@@ -14,7 +14,7 @@ export function OurStorySection() {
         <div className="md:flex">
           <div className="md:w-1/2">
             <Image
-              src="https://media-hosting.imagekit.io/e8f333912358467a/submain.png?Expires=1841763727&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=xWRrix74wIgIaXSEBhV9~avKX77lPETnX1IKUDJwOSzXJiCwCSTMB3WBOhEBgWSZu8iMCEhMVpGbMs3RgTd7fy5V81s5GaF9LGmGted2iY5UZZQoKvqx7d598PC~BXk1QnTDcosbBN2anNzN1DSKg8CoHL5lde6IhvUa5tVAvVFs5rwpQIVMnEGxYWsMKh8M~bEyX0JBOBpeoeqSGil~pdzHW-xfRybykmXJtRC~ynCD~U~uh6iNSmugi6beQMWwqIKNooDu7c9-MvDQ6UygIvZqV64O-DtRMfCRCdVVO5rqHR39N0YUtqXbTLzt5Hqskt2mLPbSz~HNf6o4CRnY6w__"
+              src="https://media-hosting.imagekit.io/8418503630e444f9/Vintage Photo Moodboard Wedding Photo Collage Template Story (2).png?Expires=1841818528&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Orb4qLzjxWSXhEWOldAvsNTXnd30nRuB4eXwuUms~7JM0lVZZFRPBhR2quMbPtis4n5ZJlueTavXGDSqmSvYFp3ks2guM8O~ifLFeKO7k2MuB6oVN6Gl0qd~5P6KPJ~enjOrLcoawst8wiO8M-c~NSiBnaOCk6GBET9Uxf4zB49QC9rj1-Wg66yHqKbb36GrtlJkjyhdJcCqFz~z3ptt1HTKDBfoAgwQFuD9HCOrdMF5rKLat7GprufsUT~u-DuS6kDIz3jZIXtTPaZvRcZ-lvI4Mdrhw5WXKndx64nlyipNB-GUVSL9jJAtTVEyBWR2aCbNWhF2WpcwsPG186YliQ__"
               alt="Couple photo"
               width={600}
               height={400}
