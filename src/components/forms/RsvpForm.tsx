@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { type RsvpFormData, rsvpFormSchema } from '@/lib/schemas';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
+import { getDbInstance, firebaseInitializationError } from '@/lib/firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const eventOptions = [
   { id: 'mehendi', label: 'Mehendi Ceremony (Nov 21)' },
@@ -29,8 +31,6 @@ export function RsvpForm() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formAlert, setFormAlert] = useState<FormAlert | null>(null);
-  const [apiFieldErrors, setApiFieldErrors] = useState<Partial<Record<keyof RsvpFormData | '_form', string[]>>>({});
-
 
   const form = useForm<RsvpFormData>({
     resolver: zodResolver(rsvpFormSchema),
@@ -44,58 +44,66 @@ export function RsvpForm() {
     },
   });
 
-  const { register, handleSubmit, formState: { errors: clientErrors }, reset, setError, control } = form;
+  const { register, handleSubmit, formState: { errors }, reset, control } = form;
 
   const onSubmitRsvp: SubmitHandler<RsvpFormData> = async (data) => {
     setIsLoading(true);
     setFormAlert(null);
-    setApiFieldErrors({});
+
+    if (firebaseInitializationError) {
+      console.error("RSVP submission blocked: Firebase initialization failed.", firebaseInitializationError);
+      const userFriendlyMessage = "We're experiencing technical difficulties. Please try again later or contact support.";
+      setFormAlert({ type: 'error', message: userFriendlyMessage });
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch('/api/rsvp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      const db = getDbInstance();
+      // IMPORTANT: Ensure your Firestore security rules allow writes to 'rsvp_submissions'
+      // from the client (e.g., for unauthenticated users if this form is public).
+      // Example rule (allow anyone to write, for development/simple sites ONLY):
+      // rules_version = '2';
+      // service cloud.firestore {
+      //   match /databases/{database}/documents {
+      //     match /rsvp_submissions/{documentId} {
+      //       allow create: if true;
+      //     }
+      //   }
+      // }
+      await addDoc(collection(db, 'rsvp_submissions'), {
+        ...data,
+        submittedAt: Timestamp.now(),
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        setFormAlert({ type: 'error', message: result.message || 'An error occurred. Please try again.' });
-        if (result.errors) {
-          setApiFieldErrors(result.errors);
-          // Optionally set errors on react-hook-form fields if keys match
-          Object.entries(result.errors as Record<string, string[]>).forEach(([key, value]) => {
-            if (key !== '_form') {
-               setError(key as keyof RsvpFormData, { type: 'server', message: value[0] });
-            }
-          });
-        }
-      } else {
-        setFormAlert({ type: 'success', message: result.message });
-        toast({
-          title: 'Success!',
-          description: result.message,
-        });
-        reset(); // Reset form on successful submission
-      }
+      toast({
+        title: 'Success!',
+        description: 'Thank you for your RSVP! We look forward to celebrating with you.',
+      });
+      setFormAlert({ type: 'success', message: 'Thank you for your RSVP! We look forward to celebrating with you.' });
+      reset();
     } catch (error) {
-      console.error('RSVP submission error:', error);
-      setFormAlert({ type: 'error', message: 'A network error occurred. Please try again.' });
-      setApiFieldErrors({ _form: ['A network error occurred. Please try again.'] });
+      console.error('Error submitting RSVP to Firestore from client:', error);
+      let errorMessage = 'An unexpected error occurred while submitting your RSVP. Please try again later.';
+      if (error instanceof Error) {
+        if (error.message.includes("offline") || error.message.includes("Failed to get document because the client is offline")) {
+            errorMessage = "You appear to be offline. Please check your internet connection and try again.";
+        } else if ((error as any).code === 'permission-denied') {
+             errorMessage = "We couldn't save your RSVP due to a permissions issue. This might be due to Firestore security rules. Please contact support.";
+        } else if (error.message.startsWith('Firebase not initialized') || error.message.startsWith('Firestore database is not available')) {
+             errorMessage = "We're experiencing technical difficulties connecting to our services. Please try again later or contact support.";
+        }
+      }
+      setFormAlert({ type: 'error', message: errorMessage });
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }
   };
-  
-  // Combine client-side and API-side errors for display
-  const getCombinedError = (fieldName: keyof RsvpFormData) => {
-    return clientErrors[fieldName]?.message || apiFieldErrors[fieldName]?.[0];
-  };
-  const formLevelError = apiFieldErrors._form?.[0];
-
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-2xl rounded-xl overflow-hidden">
@@ -110,25 +118,25 @@ export function RsvpForm() {
           <div>
             <Label htmlFor="fullName" className="font-semibold text-foreground/80">Full Name</Label>
             <Input id="fullName" {...register('fullName')} className="mt-1 bg-background/70 border-border focus:border-primary" />
-            {getCombinedError('fullName') && <p className="text-sm text-destructive mt-1">{getCombinedError('fullName')}</p>}
+            {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="email" className="font-semibold text-foreground/80">Email Address</Label>
             <Input id="email" type="email" {...register('email')} className="mt-1 bg-background/70 border-border focus:border-primary" />
-             {getCombinedError('email') && <p className="text-sm text-destructive mt-1">{getCombinedError('email')}</p>}
+            {errors.email && <p className="text-sm text-destructive mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="phoneNumber" className="font-semibold text-foreground/80">Phone Number (Optional)</Label>
             <Input id="phoneNumber" type="tel" {...register('phoneNumber')} className="mt-1 bg-background/70 border-border focus:border-primary" />
-            {getCombinedError('phoneNumber') && <p className="text-sm text-destructive mt-1">{getCombinedError('phoneNumber')}</p>}
+            {errors.phoneNumber && <p className="text-sm text-destructive mt-1">{errors.phoneNumber.message}</p>}
           </div>
           
           <div>
             <Label htmlFor="guestsCount" className="font-semibold text-foreground/80">Number of Guests Attending</Label>
             <Input id="guestsCount" type="number" {...register('guestsCount', { valueAsNumber: true })} min="1" max="10" className="mt-1 bg-background/70 border-border focus:border-primary" />
-            {getCombinedError('guestsCount') && <p className="text-sm text-destructive mt-1">{getCombinedError('guestsCount')}</p>}
+            {errors.guestsCount && <p className="text-sm text-destructive mt-1">{errors.guestsCount.message}</p>}
           </div>
 
           <div>
@@ -160,13 +168,13 @@ export function RsvpForm() {
                 </div>
               )}
             />
-            {getCombinedError('eventsAttending') && <p className="text-sm text-destructive mt-1">{getCombinedError('eventsAttending')}</p>}
+            {errors.eventsAttending && <p className="text-sm text-destructive mt-1">{errors.eventsAttending.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="notes" className="font-semibold text-foreground/80">Notes or Dietary Restrictions (Optional)</Label>
             <Textarea id="notes" {...register('notes')} rows={3} className="mt-1 bg-background/70 border-border focus:border-primary" />
-            {getCombinedError('notes') && <p className="text-sm text-destructive mt-1">{getCombinedError('notes')}</p>}
+            {errors.notes && <p className="text-sm text-destructive mt-1">{errors.notes.message}</p>}
           </div>
           
           {formAlert && (
@@ -174,7 +182,6 @@ export function RsvpForm() {
               {formAlert.message}
             </div>
           )}
-          {formLevelError && !formAlert && <p className="text-sm text-destructive mt-1">{formLevelError}</p>}
           
           <CardFooter className="p-0 pt-6 flex justify-center">
             <Button type="submit" disabled={isLoading} className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-3 text-lg">

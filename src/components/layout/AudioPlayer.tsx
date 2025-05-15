@@ -4,28 +4,26 @@
 import { useEffect, useRef } from 'react';
 
 export function AudioPlayer() {
-  // The YouTube video ID from the provided link: https://www.youtube.com/watch?v=G0HxCWBAdFg
-  const videoId = 'G0HxCWBAdFg';
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const musicPath = "/music/wedding-theme.mp3"; // Path to your music file in the public folder
 
-  // Construct the YouTube embed URL with autoplay, loop, and controls hidden.
-  // Mute is often required for autoplay to work in modern browsers.
-  // `playlist` parameter is required for `loop` to work.
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&mute=0&enablejsapi=1`;
-  // Note: mute=0 might be blocked by browser autoplay policies. If audio doesn't play, try mute=1.
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      // Attempt to play the audio
+      // Browsers may block autoplay with sound until user interaction
+      audioElement.play().catch(error => {
+        console.warn("Audio autoplay was prevented by the browser:", error);
+        // Optionally, you could show a play button here or prompt the user
+      });
+    }
+  }, []);
 
   return (
     <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
-      <iframe
-        width="1" // Minimal size
-        height="1" // Minimal size
-        src={embedUrl}
-        title="YouTube video player for background music"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        data-ai-hint="background music player"
-      ></iframe>
+      <audio ref={audioRef} src={musicPath} loop autoPlay preload="auto" data-ai-hint="background music player">
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 }
-

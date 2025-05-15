@@ -32,7 +32,7 @@ export function HeroSection() {
           Vivek & Meghna
         </h1>
         <p className="font-dancing-script text-3xl md:text-4xl lg:text-5xl mb-4">
-          ARE GETTING MARRIED
+          are getting married 
         </p>
         <div className="font-dancing-script flex items-center justify-center space-x-3 text-xl md:text-2xl text-gray-200 mb-4">
           <CalendarDays className="h-6 w-6 md:h-7 md:w-7" />
